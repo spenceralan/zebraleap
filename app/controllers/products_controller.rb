@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
 
     uri = URI 'http://localhost:12111/v1/customers'
 
-    # Create customer based on card token
+    # Create customer in ZebraLeap based on card token
     Net::HTTP.start(uri.host, uri.port) do |http|
       request = Net::HTTP::Post.new uri
       request['Authorization'] = 'Bearer sk_test_123' # set ZebraLeap password
@@ -27,7 +27,7 @@ class ProductsController < ApplicationController
 
     uri = URI 'http://localhost:12111/v1/charges'
 
-    # Charge customer
+    # Charge user
     Net::HTTP.start(uri.host, uri.port) do |http|
       request = Net::HTTP::Post.new uri
       request['Authorization'] = 'Bearer sk_test_123' # set ZebraLeap password
@@ -35,7 +35,7 @@ class ProductsController < ApplicationController
         amount: product.price_in_cents,
         currency: 'usd',
         source: 'cus_CCiTI4Tpghl0nK', # customer id from above--hardcoded for now
-        description: "Purchase of #{product.name}",
+        description: 'Purchase from Lessonly',
       })
 
       response = http.request request
