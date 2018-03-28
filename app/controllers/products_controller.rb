@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
         render json: response.body && return
       end
 
-      # TODO: parse customer id from the response
+      # TODO: get customer id from the response
     end
 
     uri = URI 'http://localhost:12111/v1/charges'
