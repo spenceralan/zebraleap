@@ -6,6 +6,7 @@ class ProductsController < ApplicationController
     card_token = params[:card_token]
 
     uri = URI 'http://localhost:12111/v1/customers'
+    customer_id = nil
 
     # Create customer in ZebraLeap based on card token
     Net::HTTP.start(uri.host, uri.port) do |http|
@@ -19,10 +20,11 @@ class ProductsController < ApplicationController
       response = http.request request
 
       if response.code != '200'
-        render json: response.body && return
+        render json: response.body
+        return
       end
 
-      # TODO: get customer id from the response
+      customer_id = JSON.parse(response.body)['id']
     end
 
     uri = URI 'http://localhost:12111/v1/charges'
@@ -34,7 +36,7 @@ class ProductsController < ApplicationController
       request.set_form_data({
         amount: product.price_in_cents,
         currency: 'usd',
-        source: 'cus_CCiTI4Tpghl0nK', # customer id from above--hardcoded for now
+        source: customer_id,
         description: 'Purchase from Lessonly',
       })
 
@@ -44,7 +46,7 @@ class ProductsController < ApplicationController
         render json: response.body
       else
         if response.body =~ /"paid":true/
-          render json: { success: true }
+          head 200
         else
           render json: { error: 'transaction failed' }
         end
