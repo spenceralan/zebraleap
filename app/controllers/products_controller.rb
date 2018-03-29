@@ -1,6 +1,10 @@
 require 'net/http'
 
 class ProductsController < ApplicationController
+  def index
+    render json: { products: Product.all }
+  end
+
   def buy
     product = Product.find params[:id]
     card_token = params[:card_token]
