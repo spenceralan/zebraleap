@@ -33,13 +33,13 @@ describe ProductsController do
         stub_unsuccessful_charge_create
       end
 
-      it 'responds with failure when the customer is not charged' do
+      it 'responds with failure status code and message when the customer is not charged' do
         get :buy, params: {
           id: product.id,
           card_token: 'tok_test_card_token',
         }
 
-        expect(response).to have_http_status(400)
+        expect(response).to have_http_status(200)
         expect(response.body).to eq({ error: 'transaction failed' }.to_json)
       end
     end
