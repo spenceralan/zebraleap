@@ -39,8 +39,8 @@ describe ProductsController do
           card_token: 'tok_test_card_token',
         }
 
-        expect(response).to be_failure
-        expect(JSON.parse(response.body)).to eq({ error: 'transaction failed' }.to_json)
+        expect(response).to have_http_status(400)
+        expect(response.body).to eq({ error: 'transaction failed' }.to_json)
       end
     end
   end
