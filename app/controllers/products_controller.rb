@@ -46,7 +46,7 @@ class ProductsController < ApplicationController
         render json: response.body
       else
         if response.body =~ /"paid":true/
-          head 200
+          render json: { success: true }
         else
           render json: { error: 'transaction failed' }
         end
