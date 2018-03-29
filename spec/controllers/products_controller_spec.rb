@@ -11,12 +11,10 @@ describe ProductsController do
 
   describe 'GET #buy' do
     context 'when the customer is charged successfully' do
-      before do
+      it 'responds with success' do
         stub_successful_customer_create
         stub_successful_charge_create
-      end
 
-      it 'responds with success' do
         get :buy, params: {
           id: product.id,
           card_token: 'tok_test_card_token',
@@ -28,12 +26,10 @@ describe ProductsController do
     end
 
     context 'when the customer cannot be charged' do
-      before do
+      it 'responds with failure status code and message when the customer is not charged' do
         stub_successful_customer_create
         stub_unsuccessful_charge_create
-      end
 
-      it 'responds with failure status code and message when the customer is not charged' do
         get :buy, params: {
           id: product.id,
           card_token: 'tok_test_card_token',
