@@ -3,10 +3,6 @@
 ## Setup
 
     $ git clone git@github.com:woven-teams/zebraleap.git
-    $ git clone https://github.com/stripe/stripe-mock.git
-
-### Set up our database and run server:
-
     $ cd zebraleap
     $ bundle install
     $ rake db:setup
