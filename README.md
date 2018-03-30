@@ -1,24 +1,37 @@
-# README
+# ZebraLeap
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Advanced setup
 
-Things you may want to cover:
+    $ git clone git@github.com:woven-teams/zebraleap.git
+    $ git clone https://github.com/stripe/stripe-mock.git
 
-* Ruby version
+### Run ZebraLeap test server
 
-* System dependencies
+    $ cd stripe-mock
+    $ docker build . -t stripe-mock
+    $ docker run -p 12111:12111 stripe-mock
 
-* Configuration
+### Set up our database and run server:
 
-* Database creation
+    $ cd zebraleap
+    $ bundle install
+    $ rake db:setup
+    $ rails server
 
-* Database initialization
+### Try it out
 
-* How to run the test suite
+Navigate to http://localhost:3000/products/1/buy and you should see:
 
-* Services (job queues, cache servers, search engines, etc.)
+    { success: true }
 
-* Deployment instructions
+in your browser.
 
-* ...
+## Run the tests
+
+On this project we use RSpec for testing. You can run all of the tests with:
+
+`rake spec`
+
+Or run a single test file with:
+
+`rspec ./spec/controllers/products_controller_spec.rb`
