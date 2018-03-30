@@ -1,6 +1,10 @@
 require 'net/http'
 
 class ProductsController < ApplicationController
+  def index
+    render json: { products: Product.all }
+  end
+
   def buy
     product = Product.find params[:id]
     card_token = params[:card_token]
@@ -43,7 +47,7 @@ class ProductsController < ApplicationController
       response = http.request request
 
       if response.code != '200'
-        render json: response.body
+        render json: { error: 'transaction failed' }
       else
         if response.body =~ /"paid":true/
           render json: { success: true }
