@@ -49,7 +49,7 @@ end
 ########################################################################
 
 def stub_successful_customer_create
-  stub_request(:post, 'http://localhost:12111/v1/customers').with(
+  stub_request(:post, 'http://zebraleap-simple-test.herokuapp.com/v1/customers').with(
     body: {
       email: 'test@example.com',
       source: 'tok_test_card_token'
@@ -61,7 +61,7 @@ def stub_successful_customer_create
 end
 
 def stub_successful_charge_create
-  stub_request(:post, 'http://localhost:12111/v1/charges').with(
+  stub_request(:post, 'http://zebraleap-simple-test.herokuapp.com/v1/charges').with(
     body: {
       amount: '40000',
       currency: 'usd',
@@ -75,7 +75,7 @@ def stub_successful_charge_create
 end
 
 def stub_unsuccessful_charge_create
-  stub_request(:post, 'http://localhost:12111/v1/charges').with(
+  stub_request(:post, 'http://zebraleap-simple-test.herokuapp.com/v1/charges').with(
     body: {
       amount: '40000',
       currency: 'usd',
