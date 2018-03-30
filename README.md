@@ -1,6 +1,6 @@
 # ZebraLeap
 
-## Advanced setup
+## Setup
 
     $ git clone git@github.com:woven-teams/zebraleap.git
     $ git clone https://github.com/stripe/stripe-mock.git
