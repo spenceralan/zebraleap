@@ -5,5 +5,5 @@ Rails.application.routes.draw do
     end
   end
 
-  root to: 'products#index'
+  root to: redirect('/products')
 end
