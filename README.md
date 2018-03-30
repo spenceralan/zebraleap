@@ -10,7 +10,7 @@
     If you're on OSX, install from homebrew:
     $ brew install stripe/stripe-mock/stripe-mock
 
-    Otherwise, download the latest release [here](https://github.com/stripe/stripe-mock/releases).
+    Otherwise, download the latest release here: https://github.com/stripe/stripe-mock/releases
 
     To run it from a terminal:
     $ stripe-mock
