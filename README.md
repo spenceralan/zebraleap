@@ -5,16 +5,6 @@
     $ git clone git@github.com:woven-teams/zebraleap.git
     $ git clone https://github.com/stripe/stripe-mock.git
 
-### Run ZebraLeap test server
-
-    If you're on OSX, install from homebrew:
-    $ brew install stripe/stripe-mock/stripe-mock
-
-    Otherwise, download the latest release here: https://github.com/stripe/stripe-mock/releases
-
-    To run it from a terminal:
-    $ stripe-mock
-
 ### Set up our database and run server:
 
     $ cd zebraleap
@@ -39,3 +29,9 @@ On this project we use RSpec for testing. You can run all of the tests with:
 Or run a single test file with:
 
 `rspec ./spec/controllers/products_controller_spec.rb`
+
+### Troubleshooting
+
+Depending on how your version of Ruby was compiled, you may run into SSL
+issues with Net::Http in the `ProductsController`. If that happens, remove
+`use_ssl: true` and change the URI from `https` to `http`.

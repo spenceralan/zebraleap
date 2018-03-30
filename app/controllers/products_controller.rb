@@ -9,11 +9,11 @@ class ProductsController < ApplicationController
     product = Product.find params[:id]
     card_token = params[:card_token]
 
-    uri = URI 'http://localhost:12111/v1/customers'
+    uri = URI 'https://zebraleap-simple-test.herokuapp.com/v1/customers'
     customer_id = nil
 
     # Create customer in ZebraLeap based on card token
-    Net::HTTP.start(uri.host, uri.port) do |http|
+    Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
       request = Net::HTTP::Post.new uri
       request['Authorization'] = 'Bearer sk_test_123' # set ZebraLeap password
       request.set_form_data({
@@ -31,10 +31,10 @@ class ProductsController < ApplicationController
       customer_id = JSON.parse(response.body)['id']
     end
 
-    uri = URI 'http://localhost:12111/v1/charges'
+    uri = URI 'https://zebraleap-simple-test.herokuapp.com/v1/charges'
 
     # Charge user
-    Net::HTTP.start(uri.host, uri.port) do |http|
+    Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
       request = Net::HTTP::Post.new uri
       request['Authorization'] = 'Bearer sk_test_123' # set ZebraLeap password
       request.set_form_data({
