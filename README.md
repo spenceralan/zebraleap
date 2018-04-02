@@ -25,9 +25,3 @@ On this project we use RSpec for testing. You can run all of the tests with:
 Or run a single test file with:
 
 `rspec ./spec/controllers/products_controller_spec.rb`
-
-### Troubleshooting
-
-Depending on how your version of Ruby was compiled, you may run into SSL
-issues with Net::Http in the `ProductsController`. If that happens, remove
-`use_ssl: true` and change the URI from `https` to `http`.
