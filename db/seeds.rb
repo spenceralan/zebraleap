@@ -21,10 +21,10 @@ programming_languages.each_with_index do |language, index|
   end
 
   unless language =~ /^[FGH]/
-    Purchase.find_or_create_by charge_id: "tok_010406_00#{index}" do |purchase|
-      purchase.product_id = product.id
-      purchase.price_in_cents = product.price_in_cents
-      purchase.user_id = user.id
-    end
+    Purchase.where(charge_id: "tok_010406_00#{index}").first_or_create \
+      product_id: product.id,
+      price_in_cents: product.price_in_cents,
+      user_id: user.id,
+      created_at: (index + ((index % 2 == 0) ? 10 : 1)).days.ago
   end
 end
