@@ -1,9 +1,0 @@
-<h1>Products</h1>
-
-<ul>
-  <% Product.all.each do |product| %>
-    <li>
-      <%= product.name %> - <%= number_to_currency product.price_in_cents / 100 %>
-    </li>
-  <% end %>
-</ul>
