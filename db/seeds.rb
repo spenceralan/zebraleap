@@ -25,7 +25,6 @@ programming_languages.each_with_index do |language, index|
       purchase.product_id = product.id
       purchase.price_in_cents = product.price_in_cents
       purchase.user_id = user.id
-      purchase.purchased_at = (index + ((index % 2 == 0) ? 10 : 1)).days.ago
     end
   end
 end
