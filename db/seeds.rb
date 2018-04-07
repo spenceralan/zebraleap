@@ -11,20 +11,24 @@ programming_languages = [
   'Ruby',
 ]
 
-user = User.find_or_create_by name: 'Test User' do |user|
-  user.email = 'test@example.com'
+users = 2.times.map do |index|
+  name = "Test User #{index + 1}"
+
+  User \
+    .where(name: name)
+    .first_or_create(email: "#{name.parameterize}@example.com")
 end
 
 programming_languages.each_with_index do |language, index|
-  product = Product.find_or_create_by name: "Premium - #{language} lesson" do |product|
-    product.price_in_cents = index * 1100 + 500
-  end
+  product = Product \
+    .where(name: "Premium - #{language} lesson")
+    .first_or_create(price_in_cents: index * 1100 + 500)
 
   unless language =~ /^[FGH]/
     Purchase.where(charge_id: "tok_010406_00#{index}").first_or_create \
       product_id: product.id,
       price_in_cents: product.price_in_cents,
-      user_id: user.id,
+      user_id: users[index % 2].id,
       created_at: (index + ((index % 2 == 0) ? 10 : 1)).days.ago
   end
 end
